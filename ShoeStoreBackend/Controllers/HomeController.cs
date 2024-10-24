@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using ShoeStore.Backend.Data;
+using ShoeStoreBackend.Helpers;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace ShoeStoreBackend.Controllers
 {
@@ -16,10 +20,31 @@ namespace ShoeStoreBackend.Controllers
             _context = context;
         }
 
-        [Route("")]
-        public IActionResult Index()
+        [Route("auth/login/{username}")]
+        public IActionResult Index(string username)
         {
-            return new JsonResult(_context.Clients.ToList());
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
+
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthOptions.ISSUER,
+                    audience: AuthOptions.AUDIENCE,
+                    claims: claims,
+                    expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)),
+                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+
+            return new JsonResult(new JwtSecurityTokenHandler().WriteToken(jwt));
+        }
+
+        [Route("")]
+        public IActionResult Login()
+        {
+            return new JsonResult(new Response("Hello, hacker"));
+        }
+
+        [Route("clients/list")]
+        public IActionResult ClientsList()
+        {
+            return new JsonResult(_context.Clients);
         }
     }
 }

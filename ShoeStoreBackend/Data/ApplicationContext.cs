@@ -14,14 +14,10 @@ namespace ShoeStore.Backend.Data
         public DbSet<Role> Roles { get; set; } = null!;
         public DbSet<Schedule> Schedules { get; set; } = null!;
         public DbSet<Shop> Shops { get; set; } = null!;
-        public ApplicationContext()
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             //Database.EnsureDeleted();
-            //Database.EnsureCreated();
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=shoe_store;Trusted_Connection=True;");
+            Database.EnsureCreated();
         }
     }
 }

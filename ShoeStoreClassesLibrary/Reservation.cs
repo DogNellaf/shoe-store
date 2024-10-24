@@ -1,5 +1,8 @@
-﻿namespace ShoeStore.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ShoeStore.Models
 {
+    [Table("Reservation")]
     public class Reservation
     {
         public long Id { get; set; }
