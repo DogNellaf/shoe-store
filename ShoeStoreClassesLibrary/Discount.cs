@@ -6,9 +6,14 @@ namespace ShoeStore.Models
     public class Discount
     {
         public long Id { get; set; }
+
+        [Column("start_at")]
         public DateTime StartAt { get; set; }
+
+        [Column("end_at")]
         public DateTime? EndAt { get; set; }
+
+        [Column("value")]
         public float Value { get; set; }
-        public List<Reservation> Reservations { get; set; }
     }
 }

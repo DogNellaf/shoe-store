@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using ShoeStoreClassesLibrary;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoeStore.Models
 {
@@ -7,6 +8,5 @@ namespace ShoeStore.Models
     {
         public long Id { get; set; }
         public string Title { get; set; }
-        public List<Item> Items { get; set; }
     }
 }

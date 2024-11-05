@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "153e966a-f0c2-431b-8e59-2fd76cffbc70",
+		"name": "ShoeStoreDiploma",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20098361"
+	},
+	"item": [
+		{
+			"name": "Test request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5024/api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5024",
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Shop 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Тестовый магазин",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Москва, улица Пушкина, д.1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5024/api/shops/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5024",
+					"path": [
+						"api",
+						"shops",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Item 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ShopId\": 1,\r\n    \"Article\": \"ОБУВЬ-Д-1\",\r\n    \"Price\": 1000,\r\n    \"StorageCount\": 100,\r\n    \"Properties\": {\r\n        \"Title\": \"Обувь\",\r\n        \"Size\": \"40\",\r\n        \"Color\": \"Коричневый\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5024/api/items/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5024",
+					"path": [
+						"api",
+						"items",
+						"create"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Admin Role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Title\": \"Администратор\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5024/api/roles/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5024",
+					"path": [
+						"api",
+						"roles",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"RoleId\": 1,\r\n    \"Login\": \"admin\",\r\n    \"Password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5024/api/employees/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5024",
+					"path": [
+						"api",
+						"employees",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Sale for Item 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ItemId\": 6,\r\n    \"EmployeeId\": 1,\r\n    \"Count\": 32,\r\n    \"IsReturned\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5024/api/sales/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5024",
+					"path": [
+						"api",
+						"sales",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

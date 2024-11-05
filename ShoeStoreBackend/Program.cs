@@ -1,17 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using ShoeStore.Backend.Data;
 using ShoeStoreBackend.Helpers;
+using ShoeStoreBackend.Services;
+using ShoeStoreBackend.Services.Interfaces;
 
 namespace ShoeStoreBackend
 {
@@ -26,6 +19,13 @@ namespace ShoeStoreBackend
             builder.Services.AddDbContext<ApplicationContext>(
                 options => options.UseSqlServer(connectionString)
             );
+
+            builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+            builder.Services.AddTransient<IItemPropertiesService, ItemPropertiesService>();
+            builder.Services.AddTransient<IItemService, ItemService>();
+            builder.Services.AddTransient<IRoleService, RoleService>();
+            builder.Services.AddTransient<ISaleService, SaleService>();
+            builder.Services.AddTransient<IShopService, ShopService>();
 
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationContext>();

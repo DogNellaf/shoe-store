@@ -1,0 +1,50 @@
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using ShoeStore.Backend.Data;
+using ShoeStore.Models;
+using ShoeStoreBackend.Dto;
+using ShoeStoreBackend.Services.Interfaces;
+using System.Security.Cryptography;
+
+namespace ShoeStoreBackend.Services
+{
+    public class EmployeeService: IEmployeeService
+    {
+        private readonly ApplicationContext _context;
+        private readonly byte[] _salt = [32, 60, 56, 148, 34, 118, 59, 74, 172, 22, 168, 15, 45, 79, 136, 230, 142, 88, 25, 31, 12, 115, 167, 31, 132, 5, 27, 95, 28, 17, 125, 235];
+        public EmployeeService(ApplicationContext context)
+        {
+            _context = context;
+        }
+
+        public Employee Create(Role role, EmployeeCreateDto dto)
+        {
+            byte[] bytes = KeyDerivation.Pbkdf2(
+                password: dto.Password,
+                salt: _salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 100000,
+                numBytesRequested: 256 / 8
+            );
+
+            var employee = new Employee()
+            {
+                Role = role,
+                Login = dto.Login,
+                Password = Convert.ToBase64String(bytes)
+            };
+            _context.Employees.Add(employee);
+            _context.SaveChanges();
+            return employee;
+        }
+
+        public Employee Find(long id)
+        {
+            return _context.Employees.FirstOrDefault(x => x.Id == id);
+        }
+
+        public Employee Find(string login)
+        {
+            return _context.Employees.FirstOrDefault(x => x.Login == login);
+        }
+    }
+}

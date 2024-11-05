@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoeStoreBackend", "ShoeStoreBackend.csproj", "{9EAC7C66-BD1D-400F-8CB4-4A51D1417B4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeStoreBackend", "ShoeStoreBackend.csproj", "{9EAC7C66-BD1D-400F-8CB4-4A51D1417B4F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoeStoreClassesLibrary", "..\ShoeStoreClassesLibrary\ShoeStoreClassesLibrary.csproj", "{44791CC2-1994-47D2-A794-6F842E165BF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{242A549C-6FE9-4A58-A8D6-C87BB1BC57A9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
