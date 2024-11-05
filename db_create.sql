@@ -1,0 +1,339 @@
+USE [master]
+GO
+/****** Object:  Database [shoe_store]    Script Date: 05.11.2024 20:59:57 ******/
+CREATE DATABASE [shoe_store]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'shoe_store', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\shoe_store.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'shoe_store_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\shoe_store_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [shoe_store] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [shoe_store].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [shoe_store] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [shoe_store] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [shoe_store] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [shoe_store] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [shoe_store] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [shoe_store] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [shoe_store] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [shoe_store] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [shoe_store] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [shoe_store] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [shoe_store] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [shoe_store] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [shoe_store] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [shoe_store] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [shoe_store] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [shoe_store] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [shoe_store] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [shoe_store] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [shoe_store] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [shoe_store] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [shoe_store] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [shoe_store] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [shoe_store] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [shoe_store] SET  MULTI_USER 
+GO
+ALTER DATABASE [shoe_store] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [shoe_store] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [shoe_store] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [shoe_store] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [shoe_store] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [shoe_store] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [shoe_store] SET QUERY_STORE = OFF
+GO
+USE [shoe_store]
+GO
+/****** Object:  Table [dbo].[Client]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Client](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[FIO] [varchar](100) NOT NULL,
+	[phone] [bigint] NOT NULL,
+ CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Discount]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Discount](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[start_at] [date] NOT NULL,
+	[end_at] [date] NULL,
+	[value] [float] NOT NULL,
+ CONSTRAINT [PK_Discount] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Employee]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Employee](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[role_id] [bigint] NOT NULL,
+	[login] [varchar](50) NOT NULL,
+	[password] [varchar](256) NOT NULL,
+ CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Item]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Item](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[shop_id] [bigint] NOT NULL,
+	[article] [varchar](255) NOT NULL,
+	[price] [float] NOT NULL,
+	[storage_count] [int] NOT NULL,
+ CONSTRAINT [PK_Item] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ItemsDiscounts]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ItemsDiscounts](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[discount_id] [bigint] NOT NULL,
+	[item_id] [bigint] NOT NULL,
+ CONSTRAINT [PK_ItemsDiscounts] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ItemsProperties]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ItemsProperties](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[item_id] [bigint] NOT NULL,
+	[property_id] [bigint] NOT NULL,
+	[value] [varchar](255) NOT NULL,
+ CONSTRAINT [PK_ItemsProperties] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Property]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Property](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[title] [varchar](255) NOT NULL,
+ CONSTRAINT [PK_Property] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Reservation]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Reservation](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[item_id] [bigint] NOT NULL,
+	[client_id] [bigint] NOT NULL,
+	[count] [smallint] NULL,
+	[end_at] [datetime] NOT NULL,
+	[deposit] [float] NULL,
+ CONSTRAINT [PK_Reservation] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Role]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Role](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[title] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Sale]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sale](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[item_id] [bigint] NOT NULL,
+	[employee_id] [bigint] NOT NULL,
+	[created_at] [datetime] NOT NULL,
+	[is_returned] [bit] NOT NULL,
+ CONSTRAINT [PK_Sale] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Schedule]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Schedule](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[employee_id] [bigint] NOT NULL,
+	[shop_id] [bigint] NOT NULL,
+	[date] [date] NOT NULL,
+ CONSTRAINT [PK_Schedule] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Shop]    Script Date: 05.11.2024 20:59:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Shop](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[title] [varchar](255) NOT NULL,
+	[address] [varchar](255) NOT NULL,
+ CONSTRAINT [PK_Shop] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Reservation] ADD  CONSTRAINT [DF_Reservation_deposit]  DEFAULT ((0)) FOR [deposit]
+GO
+ALTER TABLE [dbo].[Sale] ADD  CONSTRAINT [DF_Sale_is_returned]  DEFAULT ((0)) FOR [is_returned]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_Role] FOREIGN KEY([role_id])
+REFERENCES [dbo].[Role] ([id])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_Role]
+GO
+ALTER TABLE [dbo].[Item]  WITH CHECK ADD  CONSTRAINT [FK_Item_Shop] FOREIGN KEY([shop_id])
+REFERENCES [dbo].[Shop] ([id])
+GO
+ALTER TABLE [dbo].[Item] CHECK CONSTRAINT [FK_Item_Shop]
+GO
+ALTER TABLE [dbo].[ItemsDiscounts]  WITH CHECK ADD  CONSTRAINT [FK_ItemsDiscounts_Discount] FOREIGN KEY([discount_id])
+REFERENCES [dbo].[Discount] ([id])
+GO
+ALTER TABLE [dbo].[ItemsDiscounts] CHECK CONSTRAINT [FK_ItemsDiscounts_Discount]
+GO
+ALTER TABLE [dbo].[ItemsDiscounts]  WITH CHECK ADD  CONSTRAINT [FK_ItemsDiscounts_Item] FOREIGN KEY([item_id])
+REFERENCES [dbo].[Item] ([id])
+GO
+ALTER TABLE [dbo].[ItemsDiscounts] CHECK CONSTRAINT [FK_ItemsDiscounts_Item]
+GO
+ALTER TABLE [dbo].[ItemsProperties]  WITH CHECK ADD  CONSTRAINT [FK_ItemsProperties_Item] FOREIGN KEY([item_id])
+REFERENCES [dbo].[Item] ([id])
+GO
+ALTER TABLE [dbo].[ItemsProperties] CHECK CONSTRAINT [FK_ItemsProperties_Item]
+GO
+ALTER TABLE [dbo].[ItemsProperties]  WITH CHECK ADD  CONSTRAINT [FK_ItemsProperties_Property] FOREIGN KEY([property_id])
+REFERENCES [dbo].[Property] ([id])
+GO
+ALTER TABLE [dbo].[ItemsProperties] CHECK CONSTRAINT [FK_ItemsProperties_Property]
+GO
+ALTER TABLE [dbo].[Reservation]  WITH CHECK ADD  CONSTRAINT [FK_Reservation_Client] FOREIGN KEY([client_id])
+REFERENCES [dbo].[Client] ([id])
+GO
+ALTER TABLE [dbo].[Reservation] CHECK CONSTRAINT [FK_Reservation_Client]
+GO
+ALTER TABLE [dbo].[Reservation]  WITH CHECK ADD  CONSTRAINT [FK_Reservation_Item] FOREIGN KEY([item_id])
+REFERENCES [dbo].[Item] ([id])
+GO
+ALTER TABLE [dbo].[Reservation] CHECK CONSTRAINT [FK_Reservation_Item]
+GO
+ALTER TABLE [dbo].[Sale]  WITH CHECK ADD  CONSTRAINT [FK_Sale_Employee] FOREIGN KEY([employee_id])
+REFERENCES [dbo].[Employee] ([id])
+GO
+ALTER TABLE [dbo].[Sale] CHECK CONSTRAINT [FK_Sale_Employee]
+GO
+ALTER TABLE [dbo].[Sale]  WITH CHECK ADD  CONSTRAINT [FK_Sale_Item] FOREIGN KEY([item_id])
+REFERENCES [dbo].[Item] ([id])
+GO
+ALTER TABLE [dbo].[Sale] CHECK CONSTRAINT [FK_Sale_Item]
+GO
+ALTER TABLE [dbo].[Schedule]  WITH CHECK ADD  CONSTRAINT [FK_Schedule_Employee] FOREIGN KEY([employee_id])
+REFERENCES [dbo].[Employee] ([id])
+GO
+ALTER TABLE [dbo].[Schedule] CHECK CONSTRAINT [FK_Schedule_Employee]
+GO
+ALTER TABLE [dbo].[Schedule]  WITH CHECK ADD  CONSTRAINT [FK_Schedule_Shop] FOREIGN KEY([shop_id])
+REFERENCES [dbo].[Shop] ([id])
+GO
+ALTER TABLE [dbo].[Schedule] CHECK CONSTRAINT [FK_Schedule_Shop]
+GO
+USE [master]
+GO
+ALTER DATABASE [shoe_store] SET  READ_WRITE 
+GO
