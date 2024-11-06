@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShoeStore.Models;
 using ShoeStoreBackend.Dto;
 using ShoeStoreBackend.Helpers;
@@ -25,6 +26,7 @@ namespace ShoeStoreBackend.Controllers
 
         [Route("create")]
         [HttpPost]
+        [Authorize(Roles = "Admin|Merchandiser")]
         public IActionResult Create([FromBody] ItemCreateDto dto)
         {
 
@@ -74,6 +76,25 @@ namespace ShoeStoreBackend.Controllers
             _propertiesService.Create(dto.Properties, item);
 
             return new JsonResponse("Товар успешно добавлен", ResponseType.Success);
+        }
+
+        [Route("search")]
+        [HttpPost]
+        [Authorize]
+        public IActionResult Search([FromBody] ItemsSearchDto dto)
+        {
+            if (dto.ShopId == null)
+            {
+                return new JsonResponse("Не указан id магазина", ResponseType.ValidationError);
+            }
+
+            if (dto.Parameters == null)
+            {
+                return new JsonResponse("Не указаны параметры поиска", ResponseType.ValidationError);
+            }
+
+            var result = _itemService.FindMany(dto.Parameters, dto.ShopId.Value);
+            return new JsonResult(result);
         }
     }
 }

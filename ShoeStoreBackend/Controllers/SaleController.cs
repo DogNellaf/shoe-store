@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShoeStore.Models;
 using ShoeStoreBackend.Dto;
 using ShoeStoreBackend.Helpers;
@@ -25,6 +26,7 @@ namespace ShoeStoreBackend.Controllers
 
         [Route("create")]
         [HttpPost]
+        [Authorize(Roles = "Saler")]
         public IActionResult Create([FromBody] SaleCreateDto dto)
         {
 

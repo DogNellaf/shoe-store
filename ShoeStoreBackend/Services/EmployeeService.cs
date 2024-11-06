@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using ShoeStore.Backend.Data;
 using ShoeStore.Models;
 using ShoeStoreBackend.Dto;
@@ -18,19 +19,11 @@ namespace ShoeStoreBackend.Services
 
         public Employee Create(Role role, EmployeeCreateDto dto)
         {
-            byte[] bytes = KeyDerivation.Pbkdf2(
-                password: dto.Password,
-                salt: _salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 100000,
-                numBytesRequested: 256 / 8
-            );
-
             var employee = new Employee()
             {
                 Role = role,
                 Login = dto.Login,
-                Password = Convert.ToBase64String(bytes)
+                Password = GetPasswordHash(dto.Password)
             };
             _context.Employees.Add(employee);
             _context.SaveChanges();
@@ -39,12 +32,39 @@ namespace ShoeStoreBackend.Services
 
         public Employee Find(long id)
         {
-            return _context.Employees.FirstOrDefault(x => x.Id == id);
+            return _context.Employees.Include(x => x.Role).FirstOrDefault(x => x.Id == id);
         }
 
         public Employee Find(string login)
         {
-            return _context.Employees.FirstOrDefault(x => x.Login == login);
+            return _context.Employees.Include(x => x.Role).FirstOrDefault(x => x.Login == login);
+        }
+
+        public bool CheckPassword(Employee employee, string password)
+        {
+            if (employee == null)
+            {
+                return false;
+            }
+
+            var passwordHash = GetPasswordHash(password);
+            if (employee.Password == passwordHash)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        protected string GetPasswordHash(string password)
+        {
+            byte[] bytes = KeyDerivation.Pbkdf2(
+                password: password,
+                salt: _salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 100000,
+                numBytesRequested: 256 / 8
+            );
+            return Convert.ToBase64String(bytes);
         }
     }
 }

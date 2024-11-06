@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShoeStoreBackend.Dto;
 using ShoeStoreBackend.Helpers;
 using ShoeStoreBackend.Services;
@@ -8,6 +9,7 @@ namespace ShoeStoreBackend.Controllers
 {
     [ApiController]
     [Route("api/employees/")]
+    [Authorize(Roles = "Admin")]
     public class EmployeeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

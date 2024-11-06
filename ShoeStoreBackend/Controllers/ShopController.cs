@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShoeStoreBackend.Dto;
 using ShoeStoreBackend.Helpers;
 using ShoeStoreBackend.Services.Interfaces;
@@ -7,6 +8,7 @@ namespace ShoeStoreBackend.Controllers
 {
     [ApiController]
     [Route("api/shops/")]
+    [Authorize(Roles = "Admin")]
     public class ShopController : Controller
     {
         private readonly ILogger<HomeController> _logger;
