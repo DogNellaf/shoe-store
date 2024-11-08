@@ -26,6 +26,8 @@ namespace ShoeStoreBackend
             builder.Services.AddTransient<IRoleService, RoleService>();
             builder.Services.AddTransient<ISaleService, SaleService>();
             builder.Services.AddTransient<IShopService, ShopService>();
+            builder.Services.AddTransient<IDiscountService, DiscountService>();
+            builder.Services.AddTransient<IItemIncomeService, ItemIncomeService>();
 
             //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationContext>();

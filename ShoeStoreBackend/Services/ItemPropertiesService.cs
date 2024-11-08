@@ -1,9 +1,9 @@
 ﻿using ShoeStore.Backend.Data;
+using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Models;
-using ShoeStoreBackend.Services.Interfaces;
 using ShoeStoreClassesLibrary;
 
-namespace ShoeStoreBackend.Services
+namespace ShoeStore.Backend.Services
 {
     public class ItemPropertiesService : IItemPropertiesService
     {

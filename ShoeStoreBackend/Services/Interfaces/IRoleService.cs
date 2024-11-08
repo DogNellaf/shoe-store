@@ -1,11 +1,11 @@
 ﻿using ShoeStore.Models;
 
-namespace ShoeStoreBackend.Services.Interfaces
+namespace ShoeStore.Backend.Services.Interfaces
 {
     public interface IRoleService
     {
         public Role Create(string title);
-        public Role Find(long id);
-        public Role Find(string title);
+        public Role? Find(long id);
+        public Role? Find(string title);
     }
 }

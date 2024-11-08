@@ -1,10 +1,9 @@
 ﻿using ShoeStore.Backend.Data;
+using ShoeStore.Backend.Services.Interfaces;
+using ShoeStore.Dto.Shop;
 using ShoeStore.Models;
-using ShoeStoreBackend.Dto;
-using ShoeStoreBackend.Services.Interfaces;
-using static System.Formats.Asn1.AsnWriter;
 
-namespace ShoeStoreBackend.Services
+namespace ShoeStore.Backend.Services
 {
     public class ShopService : IShopService
     {
@@ -26,9 +25,9 @@ namespace ShoeStoreBackend.Services
             return shop;
         }
 
-        public Shop Find(long id)
+        public Shop? Find(long id)
         {
-            return _context.Shops.FirstOrDefault(x => x.Id == id);
+            return _context.Shops.SingleOrDefault(x => x.Id == id);
         }
     }
 }

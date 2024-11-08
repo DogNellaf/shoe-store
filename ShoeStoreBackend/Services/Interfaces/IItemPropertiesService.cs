@@ -1,7 +1,7 @@
 ﻿using ShoeStore.Models;
 using ShoeStoreClassesLibrary;
 
-namespace ShoeStoreBackend.Services.Interfaces
+namespace ShoeStore.Backend.Services.Interfaces
 {
     public interface IItemPropertiesService
     {

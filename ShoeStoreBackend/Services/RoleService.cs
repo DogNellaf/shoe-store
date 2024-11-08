@@ -1,8 +1,8 @@
 ﻿using ShoeStore.Backend.Data;
+using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Models;
-using ShoeStoreBackend.Services.Interfaces;
 
-namespace ShoeStoreBackend.Services
+namespace ShoeStore.Backend.Services
 {
     public class RoleService: IRoleService
     {
@@ -23,14 +23,14 @@ namespace ShoeStoreBackend.Services
             return role;
         }
 
-        public Role Find(long id)
+        public Role? Find(long id)
         {
-            return _context.Roles.FirstOrDefault(x => x.Id == id);
+            return _context.Roles.SingleOrDefault(x => x.Id == id);
         }
 
-        public Role Find(string title)
+        public Role? Find(string title)
         {
-            return _context.Roles.FirstOrDefault(x => x.Title == title);
+            return _context.Roles.SingleOrDefault(x => x.Title == title);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ShoeStore.Backend.Services.Interfaces;
+using ShoeStore.Dto.Sale;
 using ShoeStore.Models;
-using ShoeStoreBackend.Dto;
 using ShoeStoreBackend.Helpers;
-using ShoeStoreBackend.Services.Interfaces;
 
-namespace ShoeStoreBackend.Controllers
+namespace ShoeStore.Backend.Controllers
 {
     [ApiController]
     [Route("api/sales/")]

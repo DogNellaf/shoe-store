@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ShoeStore.Backend.Services.Interfaces;
+using ShoeStore.Dto.Item;
 using ShoeStore.Models;
-using ShoeStoreBackend.Dto;
 using ShoeStoreBackend.Helpers;
-using ShoeStoreBackend.Services.Interfaces;
 
-namespace ShoeStoreBackend.Controllers
+namespace ShoeStore.Backend.Controllers
 {
     [ApiController]
     [Route("api/items/")]
@@ -27,8 +27,17 @@ namespace ShoeStoreBackend.Controllers
         [Route("create")]
         [HttpPost]
         [Authorize(Roles = "Admin|Merchandiser")]
-        public IActionResult Create([FromBody] ItemCreateDto dto)
+        public IActionResult Create([FromBody] ItemCreateDto? dto)
         {
+            if (dto == null)
+            {
+                return new JsonResponse("Не были переданы данные", ResponseType.ValidationError);
+            }
+
+            if (dto.Properties == null)
+            {
+                return new JsonResponse("Не были переданы параметры товара", ResponseType.ValidationError);
+            }
 
             if (dto.ShopId == null)
             {
@@ -40,7 +49,7 @@ namespace ShoeStoreBackend.Controllers
                 return new JsonResponse("Id магазина не может быть меньше 0", ResponseType.ValidationError);
             }
 
-            Shop shop = _shopService.Find(dto.ShopId.Value);
+            Shop? shop = _shopService.Find(dto.ShopId.Value);
             if (shop == null)
             {
                 return new JsonResponse($"Магазин с таким id не найден", ResponseType.ValidationError);

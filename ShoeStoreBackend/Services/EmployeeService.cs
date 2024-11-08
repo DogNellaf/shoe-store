@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
 using ShoeStore.Backend.Data;
+using ShoeStore.Backend.Services.Interfaces;
+using ShoeStore.Dto.Employee;
 using ShoeStore.Models;
-using ShoeStoreBackend.Dto;
-using ShoeStoreBackend.Services.Interfaces;
-using System.Security.Cryptography;
 
-namespace ShoeStoreBackend.Services
+namespace ShoeStore.Backend.Services
 {
     public class EmployeeService: IEmployeeService
     {
@@ -19,6 +18,9 @@ namespace ShoeStoreBackend.Services
 
         public Employee Create(Role role, EmployeeCreateDto dto)
         {
+            ArgumentNullException.ThrowIfNull(dto.Login);
+            ArgumentNullException.ThrowIfNull(dto.Password);
+
             var employee = new Employee()
             {
                 Role = role,
@@ -30,14 +32,14 @@ namespace ShoeStoreBackend.Services
             return employee;
         }
 
-        public Employee Find(long id)
+        public Employee? Find(long id)
         {
-            return _context.Employees.Include(x => x.Role).FirstOrDefault(x => x.Id == id);
+            return _context.Employees.Include(x => x.Role).SingleOrDefault(x => x.Id == id);
         }
 
-        public Employee Find(string login)
+        public Employee? Find(string login)
         {
-            return _context.Employees.Include(x => x.Role).FirstOrDefault(x => x.Login == login);
+            return _context.Employees.Include(x => x.Role).SingleOrDefault(x => x.Login == login);
         }
 
         public bool CheckPassword(Employee employee, string password)

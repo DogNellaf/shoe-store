@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using ShoeStore.Backend.Data;
+using ShoeStore.Backend.Services.Interfaces;
+using ShoeStore.Dto.Item;
 using ShoeStore.Models;
-using ShoeStoreBackend.Dto;
-using ShoeStoreBackend.Services.Interfaces;
 
-namespace ShoeStoreBackend.Services
+namespace ShoeStore.Backend.Services
 {
     public class ItemService : IItemService
     {
@@ -17,6 +16,10 @@ namespace ShoeStoreBackend.Services
 
         public Item Create(ItemCreateDto dto, Shop shop)
         {
+            ArgumentNullException.ThrowIfNull(dto.Article);
+            ArgumentNullException.ThrowIfNull(dto.Price);
+            ArgumentNullException.ThrowIfNull(dto.StorageCount);
+
             var item = new Item()
             {
                 Shop = shop,
@@ -30,9 +33,9 @@ namespace ShoeStoreBackend.Services
             return item;
         }
 
-        public Item Find(long id)
+        public Item? Find(long id)
         {
-            return _context.Items.FirstOrDefault(x => x.Id == id);
+            return _context.Items.SingleOrDefault(x => x.Id == id);
         }
 
         public void SetStorageCount(Item item, int storageCount)
@@ -47,7 +50,7 @@ namespace ShoeStoreBackend.Services
             var parameterTitles = query.Keys;
             var result = new List<Item>();
 
-            var itemsProperties = _context.ItemProperties.Include(x => x.Item.Shop.Id);
+            var itemsProperties = _context.ItemsProperties.Include(x => x.Item.Shop.Id);
             var properties = _context.Properties;
 
             foreach (var title in parameterTitles)

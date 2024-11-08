@@ -1,4 +1,4 @@
-﻿namespace ShoeStoreBackend.Dto
+﻿namespace ShoeStore.Dto.Role
 {
     public class RoleCreateDto
     {

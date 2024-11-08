@@ -1,14 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using ShoeStore.Backend.Data;
-using ShoeStore.Models;
-using ShoeStoreBackend.Dto;
-using ShoeStoreBackend.Helpers;
-using ShoeStoreClassesLibrary;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
-namespace ShoeStoreBackend.Controllers
+namespace ShoeStore.Backend.Controllers
 {
     [ApiController]
     [Route("api")]

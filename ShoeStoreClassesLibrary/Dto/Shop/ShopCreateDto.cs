@@ -1,4 +1,4 @@
-﻿namespace ShoeStoreBackend.Dto
+﻿namespace ShoeStore.Dto.Shop
 {
     public class ShopCreateDto
     {

@@ -2,16 +2,15 @@
 
 namespace ShoeStore.Models
 {
-    [Table("ItemsProperties")]
-    public class ItemProperty
+    [Table("ItemsDiscounts")]
+    public class ItemDiscount
     {
         public long Id { get; set; }
 
         [ForeignKey("item_id")]
         public Item Item { get; set; }
 
-        [ForeignKey("property_id")]
-        public Property Property { get; set; }
-        public string Value { get; set; }
+        [ForeignKey("discount_id")]
+        public Discount Discount { get; set; }
     }
 }

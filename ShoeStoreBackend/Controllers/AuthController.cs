@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using ShoeStore.Backend.Data;
+using ShoeStore.Backend.Services.Interfaces;
 using ShoeStoreBackend.Helpers;
-using ShoeStoreBackend.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace ShoeStoreBackend.Controllers
+namespace ShoeStore.Backend.Controllers
 {
 
     [Route("api/auth/")]

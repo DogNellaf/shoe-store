@@ -14,6 +14,6 @@ namespace ShoeStore.Models
         public DateTime? EndAt { get; set; }
 
         [Column("value")]
-        public float Value { get; set; }
+        public double Value { get; set; }
     }
 }

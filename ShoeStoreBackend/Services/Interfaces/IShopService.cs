@@ -1,11 +1,11 @@
-﻿using ShoeStore.Models;
-using ShoeStoreBackend.Dto;
+﻿using ShoeStore.Dto.Shop;
+using ShoeStore.Models;
 
-namespace ShoeStoreBackend.Services.Interfaces
+namespace ShoeStore.Backend.Services.Interfaces
 {
     public interface IShopService
     {
         Shop Create(ShopCreateDto dto);
-        Shop Find(long id);
+        Shop? Find(long id);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using ShoeStore.Models;
 
-namespace ShoeStoreBackend.Services.Interfaces
+namespace ShoeStore.Backend.Services.Interfaces
 {
     public interface ISaleService
     {
