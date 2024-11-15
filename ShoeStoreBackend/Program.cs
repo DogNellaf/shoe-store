@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ShoeStore.Backend.Data;
-using ShoeStoreBackend.Helpers;
-using ShoeStoreBackend.Services;
-using ShoeStoreBackend.Services.Interfaces;
+using ShoeStore.Backend.Services;
+using ShoeStore.Backend.Services.Interfaces;
+using ShoeStore.Helpers;
 
 namespace ShoeStoreBackend
 {

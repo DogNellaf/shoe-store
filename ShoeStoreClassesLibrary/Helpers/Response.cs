@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace ShoeStoreBackend.Helpers
+﻿namespace ShoeStore.Helpers
 {
     public class Response
     {

@@ -8,15 +8,15 @@ namespace ShoeStore.Models
         public long Id { get; set; }
 
         [ForeignKey("item_id")]
-        public Item Item { get; set; }
+        public required Item Item { get; set; }
 
         [ForeignKey("employee_id")]
-        public Employee Employee { get; set; }
+        public required Employee Employee { get; set; }
 
         [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public required DateTime CreatedAt { get; set; }
 
         [Column("is_returned")]
-        public bool IsReturned { get; set; } = false;
+        public required bool IsReturned { get; set; } = false;
     }
 }

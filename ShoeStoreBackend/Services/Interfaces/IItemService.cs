@@ -8,6 +8,6 @@ namespace ShoeStore.Backend.Services.Interfaces
         Item Create(ItemCreateDto dto, Shop shop);
         Item? Find(long id);
         void SetStorageCount(Item item, int storageCount);
-        List<Item> FindMany(Dictionary<string, string[]> query, long ShopId);
+        public List<Item> FindMany(string[] titles, string[] values, long shopId);
     }
 }

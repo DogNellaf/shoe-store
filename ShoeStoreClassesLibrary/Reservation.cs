@@ -8,18 +8,18 @@ namespace ShoeStore.Models
         public long Id { get; set; }
 
         [ForeignKey("item_id")]
-        public Item Item { get; set; }
+        public required Item Item { get; set; }
 
         [ForeignKey("client_id")]
-        public Client Client { get; set; }
+        public required Client Client { get; set; }
 
         [Column("count")]
-        public short? Count { get; set; } = null;
+        public required short? Count { get; set; } = null;
 
         [Column("end_at")]
         public DateTime EndAt { get; set; }
 
         [Column("deposit")]
-        public float? Deposit { get; set; } = 0;
+        public required float? Deposit { get; set; } = 0;
     }
 }

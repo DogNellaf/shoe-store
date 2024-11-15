@@ -9,15 +9,15 @@ namespace ShoeStore.Models
         public long Id { get; set; }
 
         [ForeignKey("shop_id")]
-        public Shop Shop { get; set; }
+        public required Shop Shop { get; set; }
 
         [Column("article")]
-        public string Article { get; set; }
+        public required string Article { get; set; }
 
         [Column("price")]
-        public double Price { get; set; }
+        public required double Price { get; set; }
 
         [Column("storage_count")]
-        public int StorageCount { get; set; }
+        public required int StorageCount { get; set; }
     }
 }

@@ -45,26 +45,20 @@ namespace ShoeStore.Backend.Services
             _context.SaveChanges();
         }
 
-        public List<Item> FindMany(Dictionary<string, string[]> query, long shopId)
+        public List<Item> FindMany(string[] titles, string[] values, long shopId)
         {
-            var parameterTitles = query.Keys;
-            var result = new List<Item>();
-
-            var itemsProperties = _context.ItemsProperties.Include(x => x.Item.Shop.Id);
-            var properties = _context.Properties;
-
-            foreach (var title in parameterTitles)
-            {
-                var property = properties.FirstOrDefault(x => x.Title == title);
-                if (property != null)
-                {
-                    var values = query[title];
-                    var items = itemsProperties.Where(x => x.Property.Id == property.Id).Where(x => values.Contains(x.Value));
-                    result.AddRange(items.Select(x => x.Item));
-                }
-            }
-
-            return result.Where(x => x.Shop.Id == shopId).DistinctBy(x => x.Id).ToList();
+            return  _context
+                    .ItemsProperties
+                    .Include(x => x.Property)
+                    .Include(x => x.Item)
+                    .Include(x => x.Item.Shop)
+                    .Where(x => x.Item.Shop.Id == shopId)
+                    .Where(x => x.Item.StorageCount > 0)
+                    .Where(x => titles.Contains(x.Property.Title))
+                    .Where(x => values.Contains(x.Value))
+                    .Select(x => x.Item)
+                    //.Distinct()
+                    .ToList();
         }
     }
 }

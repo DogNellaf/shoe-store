@@ -8,10 +8,10 @@ namespace ShoeStore.Models
         public long Id { get; set; }
 
         [ForeignKey("employee_id")]
-        public Employee Employee { get; set; }
+        public required Employee Employee { get; set; }
 
         [ForeignKey("shop_id")]
-        public Shop Shop { get; set; }
-        public DateTime Date { get; set; }
+        public required Shop Shop { get; set; }
+        public required DateTime Date { get; set; }
     }
 }

@@ -1,7 +1,6 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ShoeStoreBackend.Helpers
+namespace ShoeStore.Helpers
 {
     public class JsonResponse: JsonResult
     {

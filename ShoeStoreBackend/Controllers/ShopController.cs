@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Dto.Shop;
-using ShoeStoreBackend.Helpers;
+using ShoeStore.Helpers;
 
 namespace ShoeStore.Backend.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace ShoeStoreBackend.Helpers
+namespace ShoeStore.Helpers
 {
     public class AuthOptions
     {

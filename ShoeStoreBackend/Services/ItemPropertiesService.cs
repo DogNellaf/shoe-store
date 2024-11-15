@@ -1,7 +1,6 @@
 ﻿using ShoeStore.Backend.Data;
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Models;
-using ShoeStoreClassesLibrary;
 
 namespace ShoeStore.Backend.Services
 {

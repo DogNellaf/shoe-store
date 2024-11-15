@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Dto.Discount;
-using ShoeStoreBackend.Helpers;
+using ShoeStore.Helpers;
 
 namespace ShoeStore.Backend.Controllers
 {
@@ -75,7 +75,7 @@ namespace ShoeStore.Backend.Controllers
 
         [Route("attach")]
         [HttpPost]
-        [Authorize(Roles = "Admin|Merchandiser")]
+        [Authorize(Roles = "Admin,Merchandiser")]
         public IActionResult Attach([FromBody] DiscountAttachDto dto)
         {
             if (dto.DiscountId == null)

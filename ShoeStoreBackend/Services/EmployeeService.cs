@@ -44,10 +44,7 @@ namespace ShoeStore.Backend.Services
 
         public bool CheckPassword(Employee employee, string password)
         {
-            if (employee == null)
-            {
-                return false;
-            }
+            ArgumentNullException.ThrowIfNull(employee);
 
             var passwordHash = GetPasswordHash(password);
             if (employee.Password == passwordHash)

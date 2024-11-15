@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ShoeStoreClassesLibrary">
-      <HintPath>..\ShoeStoreClassesLibrary\bin\Debug\net8.0-windows7.0\ShoeStoreClassesLibrary.dll</HintPath>
+    <Reference Include="Library">
+      <HintPath>..\ShoeStoreClassesLibrary\bin\Debug\net8.0-windows7.0\Library.dll</HintPath>
     </Reference>
   </ItemGroup>
 

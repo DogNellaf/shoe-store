@@ -1,5 +1,4 @@
 ﻿using ShoeStore.Models;
-using ShoeStoreClassesLibrary;
 
 namespace ShoeStore.Backend.Services.Interfaces
 {

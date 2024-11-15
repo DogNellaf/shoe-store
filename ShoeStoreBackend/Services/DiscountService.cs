@@ -2,7 +2,6 @@
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Dto.Discount;
 using ShoeStore.Models;
-using ShoeStoreClassesLibrary;
 
 namespace ShoeStore.Backend.Services
 {

@@ -8,10 +8,10 @@ namespace ShoeStore.Models
         public long Id { get; set; }
 
         [ForeignKey("item_id")]
-        public Item Item { get; set; }
+        public required Item Item { get; set; }
 
         [ForeignKey("property_id")]
-        public Property Property { get; set; }
-        public string Value { get; set; }
+        public required Property Property { get; set; }
+        public required string Value { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using ShoeStore.Backend.Services.Interfaces;
-using ShoeStoreBackend.Helpers;
+using ShoeStore.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -26,14 +26,19 @@ namespace ShoeStore.Backend.Controllers
         {
             var user = _service.Find(username);
 
-            if (!_service.CheckPassword(user, password))
+            if (user == null)
+            {
+                return new JsonResponse("Пользователь не найден", ResponseType.Error);
+            }
+
+            if (_service.CheckPassword(user, password) == false)
             {
                 return new JsonResponse("Указаны неверные данные авторизации", ResponseType.Error);
             }
 
             var claims = new List<Claim> {
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Role, user.Role.Title)
+                new(ClaimTypes.Name, username),
+                new(ClaimTypes.Role, user.Role.Title)
             };
 
             var jwt = new JwtSecurityToken(
@@ -43,7 +48,9 @@ namespace ShoeStore.Backend.Controllers
                     expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(1)),
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
-            return new JsonResult(new JwtSecurityTokenHandler().WriteToken(jwt));
+            var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            return new JsonResponse(token, ResponseType.Info);
         }
 
         [Route("refresh/{username}")]

@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Dto.Sale;
+using ShoeStore.Helpers;
 using ShoeStore.Models;
-using ShoeStoreBackend.Helpers;
 
 namespace ShoeStore.Backend.Controllers
 {
@@ -26,7 +26,7 @@ namespace ShoeStore.Backend.Controllers
 
         [Route("create")]
         [HttpPost]
-        [Authorize(Roles = "Saler")]
+        [Authorize(Roles = "Seller")]
         public IActionResult Create([FromBody] SaleCreateDto dto)
         {
 
@@ -45,7 +45,7 @@ namespace ShoeStore.Backend.Controllers
                 return new JsonResponse($"Количество не может быть меньше или равно 0", ResponseType.ValidationError);
             }
 
-            Item item = _itemSerivce.Find(dto.ItemId.Value);
+            Item? item = _itemSerivce.Find(dto.ItemId.Value);
             if (item == null)
             {
                 return new JsonResponse($"Товар с таким id не найден", ResponseType.ValidationError);
@@ -61,7 +61,7 @@ namespace ShoeStore.Backend.Controllers
                 return new JsonResponse("Не указан id сотрудника", ResponseType.ValidationError);
             }
 
-            Employee employee = _employeeService.Find(dto.EmployeeId.Value);
+            Employee? employee = _employeeService.Find(dto.EmployeeId.Value);
             if (employee == null)
             {
                 return new JsonResponse($"Сотрудник с таким id не найден", ResponseType.ValidationError);

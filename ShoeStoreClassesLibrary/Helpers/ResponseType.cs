@@ -1,4 +1,4 @@
-﻿namespace ShoeStoreBackend.Helpers
+﻿namespace ShoeStore.Helpers
 {
     public enum ResponseType
     {

@@ -8,9 +8,9 @@ namespace ShoeStore.Models
         public long Id { get; set; }
 
         [ForeignKey("item_id")]
-        public Item Item { get; set; }
+        public required Item Item { get; set; }
 
         [ForeignKey("discount_id")]
-        public Discount Discount { get; set; }
+        public required Discount Discount { get; set; }
     }
 }

@@ -9,8 +9,8 @@ namespace ShoeStore.Models
         public long Id { get; set; }
 
         [ForeignKey("role_id")]
-        public Role Role { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public required Role Role { get; set; }
+        public required string Login { get; set; }
+        public required string Password { get; set; }
     }
 }

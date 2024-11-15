@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Dto.Item;
+using ShoeStore.Helpers;
 using ShoeStore.Models;
-using ShoeStoreBackend.Helpers;
 
 namespace ShoeStore.Backend.Controllers
 {
@@ -26,7 +26,7 @@ namespace ShoeStore.Backend.Controllers
 
         [Route("create")]
         [HttpPost]
-        [Authorize(Roles = "Admin|Merchandiser")]
+        [Authorize(Roles = "Admin,Merchandiser")]
         public IActionResult Create([FromBody] ItemCreateDto? dto)
         {
             if (dto == null)
@@ -102,7 +102,10 @@ namespace ShoeStore.Backend.Controllers
                 return new JsonResponse("Не указаны параметры поиска", ResponseType.ValidationError);
             }
 
-            var result = _itemService.FindMany(dto.Parameters, dto.ShopId.Value);
+            var titles = dto.Parameters.Keys.ToArray();
+            var values = dto.Parameters.SelectMany(x => x.Value).ToArray();
+
+            var result = _itemService.FindMany(titles, values, dto.ShopId.Value);
             return new JsonResult(result);
         }
     }

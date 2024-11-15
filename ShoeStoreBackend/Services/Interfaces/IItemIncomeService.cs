@@ -1,5 +1,5 @@
 ﻿using ShoeStore.Dto.ItemIncome;
-using ShoeStoreClassesLibrary;
+using ShoeStore.Models;
 
 namespace ShoeStore.Backend.Services.Interfaces
 {
