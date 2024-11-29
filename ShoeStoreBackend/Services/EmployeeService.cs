@@ -32,6 +32,11 @@ namespace ShoeStore.Backend.Services
             return employee;
         }
 
+        public List<Employee> GetAll()
+        {
+            return _context.Employees.Include(x => x.Role).ToList();
+        }
+
         public Employee? Find(long id)
         {
             return _context.Employees.Include(x => x.Role).SingleOrDefault(x => x.Id == id);
@@ -56,6 +61,11 @@ namespace ShoeStore.Backend.Services
 
         protected string GetPasswordHash(string password)
         {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                return "";
+            }
+
             byte[] bytes = KeyDerivation.Pbkdf2(
                 password: password,
                 salt: _salt,

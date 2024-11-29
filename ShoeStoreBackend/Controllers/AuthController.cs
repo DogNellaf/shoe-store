@@ -50,7 +50,14 @@ namespace ShoeStore.Backend.Controllers
 
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            return new JsonResponse(token, ResponseType.Info);
+            return new JsonResponse(
+                new Dictionary<string, object>()
+                {
+                    {"token", token },
+                    {"role", user.Role.Title }
+                },
+                ResponseType.Info
+            );
         }
 
         [Route("refresh/{username}")]

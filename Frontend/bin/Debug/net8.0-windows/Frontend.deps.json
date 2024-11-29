@@ -8,10 +8,19 @@
     ".NETCoreApp,Version=v8.0": {
       "Frontend/1.0.0": {
         "dependencies": {
+          "XamlAnimatedGif": "2.3.0",
           "Library": "1.0.0.0"
         },
         "runtime": {
           "Frontend.dll": {}
+        }
+      },
+      "XamlAnimatedGif/2.3.0": {
+        "runtime": {
+          "lib/net5.0-windows7.0/XamlAnimatedGif.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.3.0.0"
+          }
         }
       },
       "Library/1.0.0.0": {
@@ -29,6 +38,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "XamlAnimatedGif/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MfEQ2abw2S6PKstH/MXAGuiJzaOsd6qv+nm552KdM/+EiaOV1O2X51hcgoDiM8pDCuOvvu1gjXv8d384ftEerw==",
+      "path": "xamlanimatedgif/2.3.0",
+      "hashPath": "xamlanimatedgif.2.3.0.nupkg.sha512"
     },
     "Library/1.0.0.0": {
       "type": "reference",

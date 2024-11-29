@@ -1,11 +1,49 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {}
+    "net8.0-windows7.0": {
+      "XamlAnimatedGif/2.3.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0-windows7.0/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/net5.0-windows7.0/XamlAnimatedGif.dll": {
+            "related": ".pdb"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "XamlAnimatedGif/2.3.0": {
+      "sha512": "MfEQ2abw2S6PKstH/MXAGuiJzaOsd6qv+nm552KdM/+EiaOV1O2X51hcgoDiM8pDCuOvvu1gjXv8d384ftEerw==",
+      "type": "package",
+      "path": "xamlanimatedgif/2.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "assets/xamlanimatedgif.png",
+        "lib/net45/XamlAnimatedGif.dll",
+        "lib/net45/XamlAnimatedGif.pdb",
+        "lib/net5.0-windows7.0/XamlAnimatedGif.dll",
+        "lib/net5.0-windows7.0/XamlAnimatedGif.pdb",
+        "lib/netcoreapp3.1/XamlAnimatedGif.dll",
+        "lib/netcoreapp3.1/XamlAnimatedGif.pdb",
+        "xamlanimatedgif.2.3.0.nupkg.sha512",
+        "xamlanimatedgif.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": []
+    "net8.0-windows7.0": [
+      "XamlAnimatedGif >= 2.3.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\DogNellaf_\\.nuget\\packages\\": {}
@@ -51,6 +89,12 @@
     "frameworks": {
       "net8.0-windows7.0": {
         "targetAlias": "net8.0-windows",
+        "dependencies": {
+          "XamlAnimatedGif": {
+            "target": "Package",
+            "version": "[2.3.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

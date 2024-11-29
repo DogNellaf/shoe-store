@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Library.Dto.Employee;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Dto.Employee;
@@ -27,15 +28,15 @@ namespace ShoeStore.Backend.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] EmployeeCreateDto dto)
         {
-            if (dto.RoleId == null)
+            if (string.IsNullOrEmpty(dto.Role))
             {
-                return new JsonResponse("Не указан id роли", ResponseType.ValidationError);
+                return new JsonResponse("Не указана роль", ResponseType.ValidationError);
             }
 
-            var role = _roleService.Find(dto.RoleId.Value);
+            var role = _roleService.Find(dto.Role);
             if (role == null)
             {
-                return new JsonResponse("Роль с таким id не существует", ResponseType.ValidationError);
+                return new JsonResponse("Роль с таким названием не существует", ResponseType.ValidationError);
             }
 
             if (string.IsNullOrEmpty(dto.Login))
@@ -57,5 +58,36 @@ namespace ShoeStore.Backend.Controllers
             _employeeService.Create(role, dto);
             return new JsonResponse("Сотрудник успешно добавлен", ResponseType.Success);
         }
+
+        [Route("")]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var result = new Dictionary<string, object>()
+            {
+                { "result", _employeeService.GetAll().Select(x => new EmployeeInfoDto(x.Id, x.Login, x.Role)) }
+            };
+
+            return new JsonResponse(result, ResponseType.Info);
+        }
+
+        //[Route("{login}")]
+        //[HttpPost]
+        //public IActionResult Create(string login)
+        //{
+
+        //    if (string.IsNullOrEmpty(login))
+        //    {
+        //        return new JsonResponse("Не указан логин", ResponseType.ValidationError);
+        //    }
+
+        //    var employee = _employeeService.Find(login);
+        //    if (employee == null)
+        //    {
+        //        return new JsonResponse("Сотрудник с таким логином не существует", ResponseType.ValidationError);
+        //    }
+
+        //    return new JsonResponse(employee, ResponseType.Success);
+        //}
     }
 }

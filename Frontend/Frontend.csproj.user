@@ -7,7 +7,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Windows\Auth\Login.xaml.cs">
+    <Compile Update="Windows\Admin\AdminPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Admin\EmployeeEditor.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -15,7 +18,10 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Windows\Auth\Login.xaml">
+    <Page Update="Windows\Admin\AdminPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Admin\EmployeeEditor.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
