@@ -100,7 +100,7 @@ namespace ShoeStore.Helpers
             return JsonSerializer.Deserialize<List<EmployeeInfoDto>>(itemsRaw);
         }
 
-        internal static async Task<HttpStatusCode> CreateEmployee(EmployeeInfoDto dto, string password)
+        internal static async Task<HttpStatusCode> CreateEmployee(EmployeeInfoDto dto)
         {
             var url = $"{BackendHostUrl}/api/employees/create";
 
@@ -110,7 +110,7 @@ namespace ShoeStore.Helpers
             var createDto = new EmployeeCreateDto()
             {
                 Login = dto.Login,
-                Password = password,
+                Password = dto.Password,
                 Role = dto.Role
             };
             var json = JsonSerializer.Serialize(createDto);
@@ -123,12 +123,58 @@ namespace ShoeStore.Helpers
                 return HttpStatusCode.InternalServerError;
             }
 
-            if (response.StatusCode != 200)
+            return (HttpStatusCode)response.StatusCode;
+        }
+
+        internal static async Task<HttpStatusCode> UpdateEmployee(EmployeeInfoDto dto)
+        {
+            var url = $"{BackendHostUrl}/api/employees/update";
+
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+
+            var json = JsonSerializer.Serialize(dto);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var request = await client.PutAsync(url, content);
+            var response = await request.Content.ReadFromJsonAsync<Response?>();
+
+            if (request == null)
             {
-                return HttpStatusCode.BadRequest;
+                return HttpStatusCode.InternalServerError;
             }
 
-            return HttpStatusCode.OK;
+            return (HttpStatusCode)response.StatusCode;
+        }
+
+        internal static async Task<List<string>> GetRoles()
+        {
+            var url = $"{BackendHostUrl}/api/roles/"; //TODO: проверить
+
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+            //var request = new HttpRequestMessage()
+            //{
+            //    RequestUri = new Uri(url),
+            //    Headers = headers,
+            //    Method = HttpMethod.Get,
+            //};
+            //client. = $"Bearer {Token }";
+            var request = await client.GetAsync(url);
+            var response = await request.Content.ReadFromJsonAsync<Response?>();
+
+            // TODO: добавить проверку на отсутствие ответа от сервера
+            //if (response == null)
+            //{
+            //    return HttpStatusCode.InternalServerError;
+            //}
+
+            //if (response.Values == null)
+            //{
+            //    return HttpStatusCode.InternalServerError;
+            //}
+
+            string itemsRaw = response.Values["result"].ToString();
+            return JsonSerializer.Deserialize<List<string>>(itemsRaw);
         }
     }
 }

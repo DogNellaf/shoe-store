@@ -11,6 +11,9 @@ namespace Library.Dto.Employee
         [JsonPropertyName("Login")]
         public string Login {  get; set; }
 
+        [JsonPropertyName("Password")]
+        public string? Password { get; set; } = null;
+
         [JsonPropertyName("Role")]
         public string Role {  get; set; }
 
@@ -23,6 +26,11 @@ namespace Library.Dto.Employee
             Id = id;
             Login = login;
             Role = role.Title;
+        }
+
+        public EmployeeInfoDto Copy()
+        {
+            return MemberwiseClone() as EmployeeInfoDto;
         }
     }
 }

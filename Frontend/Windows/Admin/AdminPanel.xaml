@@ -9,16 +9,16 @@
     <Grid>
         <Label x:Name="TitleLabel" Margin="10,10,55,0" VerticalAlignment="Top" Height="40" Content="Добро пожаловать, ..." FontSize="24"/>
         <Button x:Name="exitButton" Content="Х" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="40" Height="40" Click="exitButton_Click"/>
-        <Button x:Name="employeeEditorButton" Content="Сотрудники" HorizontalAlignment="Center" Margin="-496,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16" Click="employeeEditorButton_Click"/>
-        <Button x:Name="discountEditorButton" Content="Скидки" HorizontalAlignment="Center" Margin="-244,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
-        <Button x:Name="shopEditorButton" Content="Магазины" HorizontalAlignment="Center" Margin="0,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
-        <Button x:Name="saleEditorButton" Content="Продажи" HorizontalAlignment="Center" Margin="244,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
-        <Button x:Name="incomeEditorButton" Content="Поступления" HorizontalAlignment="Center" Margin="496,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
-        <Button Content="График" HorizontalAlignment="Center" Margin="-496,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
-        <Button Content="Товары" HorizontalAlignment="Center" Margin="-244,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
-        <Button Content="Бронирования" HorizontalAlignment="Center" Margin="0,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
-        <Button Content="Параметры" HorizontalAlignment="Center" Margin="244,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
-        <Button Content="Клиенты" HorizontalAlignment="Center" Margin="496,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="16"/>
+        <Button x:Name="employeeEditorButton" Content="Сотрудники" HorizontalAlignment="Center" Margin="-496,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14" Click="employeeEditorButton_Click"/>
+        <Button x:Name="discountEditorButton" Content="Скидки" HorizontalAlignment="Center" Margin="-244,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
+        <Button x:Name="shopEditorButton" Content="Магазины" HorizontalAlignment="Center" Margin="0,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
+        <Button x:Name="saleEditorButton" Content="Продажи" HorizontalAlignment="Center" Margin="244,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
+        <Button x:Name="incomeEditorButton" Content="Поступления" HorizontalAlignment="Center" Margin="496,-136,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
+        <Button Content="График" HorizontalAlignment="Center" Margin="-496,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
+        <Button Content="Товары" HorizontalAlignment="Center" Margin="-244,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
+        <Button Content="Бронирования" HorizontalAlignment="Center" Margin="0,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
+        <Button Content="Параметры" HorizontalAlignment="Center" Margin="244,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
+        <Button Content="Клиенты" HorizontalAlignment="Center" Margin="496,166,0,0" VerticalAlignment="Center" Width="104" Height="100" FontSize="14"/>
 
     </Grid>
 </Window>

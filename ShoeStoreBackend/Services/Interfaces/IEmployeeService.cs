@@ -1,4 +1,5 @@
-﻿using ShoeStore.Dto.Employee;
+﻿using Library.Dto.Employee;
+using ShoeStore.Dto.Employee;
 using ShoeStore.Models;
 
 namespace ShoeStore.Backend.Services.Interfaces
@@ -10,5 +11,6 @@ namespace ShoeStore.Backend.Services.Interfaces
         Employee? Find(long id);
         Employee? Find(string login);
         bool CheckPassword(Employee employee, string password);
+        bool Update(Role role, EmployeeInfoDto dto);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+﻿using Library.Dto.Employee;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
 using ShoeStore.Backend.Data;
 using ShoeStore.Backend.Services.Interfaces;
@@ -74,6 +75,27 @@ namespace ShoeStore.Backend.Services
                 numBytesRequested: 256 / 8
             );
             return Convert.ToBase64String(bytes);
+        }
+
+        public bool Update(Role role, EmployeeInfoDto dto)
+        {
+            var originalEmployee = Find(dto.Id);
+            if (originalEmployee == null)
+            {
+                return false;
+            }
+
+            originalEmployee.Login = dto.Login;
+            originalEmployee.Role = role;
+
+            if (dto.Password != null)
+            {
+                originalEmployee.Password = GetPasswordHash(dto.Password);
+            }
+
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

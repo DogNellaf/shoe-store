@@ -36,7 +36,7 @@ namespace ShoeStore.Backend.Controllers
             var role = _roleService.Find(dto.Role);
             if (role == null)
             {
-                return new JsonResponse("Роль с таким названием не существует", ResponseType.ValidationError);
+                return new JsonResponse("Роль с таким названием не существует", ResponseType.ValidationError, 404);
             }
 
             if (string.IsNullOrEmpty(dto.Login))
@@ -47,7 +47,7 @@ namespace ShoeStore.Backend.Controllers
             var sameEmployee = _employeeService.Find(dto.Login);
             if (sameEmployee != null)
             {
-                return new JsonResponse("Сотрудник с таким логином уже существует", ResponseType.ValidationError);
+                return new JsonResponse("Сотрудник с таким логином уже существует", ResponseType.ValidationError, 409);
             }
 
             if (string.IsNullOrEmpty(dto.Password))
@@ -57,6 +57,43 @@ namespace ShoeStore.Backend.Controllers
 
             _employeeService.Create(role, dto);
             return new JsonResponse("Сотрудник успешно добавлен", ResponseType.Success);
+        }
+
+        [Route("update")]
+        [HttpPut]
+        public IActionResult Update([FromBody] EmployeeInfoDto dto)
+        {
+            if (string.IsNullOrEmpty(dto.Role))
+            {
+                return new JsonResponse("Не указана роль", ResponseType.ValidationError);
+            }
+
+            var role = _roleService.Find(dto.Role);
+            if (role == null)
+            {
+                return new JsonResponse("Роль с таким названием не существует", ResponseType.ValidationError, 404);
+            }
+
+            if (string.IsNullOrEmpty(dto.Login))
+            {
+                return new JsonResponse("Не указан логин", ResponseType.ValidationError);
+            }
+
+            var sameEmployee = _employeeService.Find(dto.Id);
+            if (sameEmployee == null)
+            {
+                return new JsonResponse("Сотрудник с таким Id не существует", ResponseType.ValidationError, 409);
+            }
+
+            var isCompleted = _employeeService.Update(role, dto);
+            if (isCompleted)
+            {
+                return new JsonResponse("Сотрудник успешно изменен", ResponseType.Success);
+            }
+            else
+            {
+                return new JsonResponse("Не удалось изменить пользователя", ResponseType.Error);
+            }
         }
 
         [Route("")]

@@ -1,19 +1,10 @@
 ﻿using Library.Dto.Employee;
 using Library.Helpers;
 using ShoeStore.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Frontend.Windows.Admin
 {
@@ -24,6 +15,9 @@ namespace Frontend.Windows.Admin
     {
         private Window _parent;
         private bool _isRowEditEnding;
+        private bool _DoesNewUserHaveAllData = false;
+        private EmployeeInfoDto lastNewUser = null;
+
         public EmployeeEditor(Window parent)
         {
             InitializeComponent();
@@ -41,27 +35,23 @@ namespace Frontend.Windows.Admin
             dataGrid.CanUserResizeColumns = false;
             dataGrid.CanUserReorderColumns = false;
 
-            //foreach (var item in dataGrid.Row)
-            //{
-                
-            //}
-
             LoadingGrid.Visibility = Visibility.Hidden;
         }
 
-        private bool checkExistsLogin(string login)
+        private bool checkExistsLogin(string login, int rowIndex)
         {
             var loginColumn = dataGrid.Columns[0];
-            foreach (var item in dataGrid.Items)
+            for (int i = 0; i < dataGrid.Items.Count; i++)
             {
+                var item = dataGrid.Items[i];
                 var user = item as EmployeeInfoDto;
 
                 if (user == null)
                 {
                     continue;
                 }
-                    
-                if (user.Login == login)
+
+                if (user.Login == login && i != rowIndex)
                 {
                     return true;
                 }
@@ -75,7 +65,7 @@ namespace Frontend.Windows.Admin
             Close();
         }
 
-        private void dataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        private async void dataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (_isRowEditEnding)
                 return;
@@ -84,12 +74,15 @@ namespace Frontend.Windows.Admin
             {
                 _isRowEditEnding = true;
 
+                var row = e.Row;
+
+                var oldDto = (row.Item as EmployeeInfoDto).Copy();
+
                 if (e.EditAction == DataGridEditAction.Commit)
                 {
                     dataGrid.CommitEdit(DataGridEditingUnit.Row, true);
                 }
-
-                var row = e.Row;
+                
                 var dto = row.Item as EmployeeInfoDto;
 
                 if (dto == null)
@@ -97,13 +90,62 @@ namespace Frontend.Windows.Admin
 
                 if (!string.IsNullOrEmpty(dto.Login) && !string.IsNullOrEmpty(dto.Role))
                 {
-                    if (!checkExistsLogin(dto.Login))
+                    if (!checkExistsLogin(dto.Login, row.GetIndex()))
                     {
-                        MessageBox.Show($"Пользователь успешно создан");
+                        if (dto == lastNewUser)
+                        {
+                            if (string.IsNullOrEmpty(dto.Password))
+                            {
+                                MessageBox.Show($"Для нового пользователя обязательно должен быть задан пароль", "Ошибка!");
+                            }
+                            else
+                            {
+                                var code = await ShoeHttpClient.CreateEmployee(dto);
+                                switch (code)
+                                {
+                                    case HttpStatusCode.OK:
+                                        MessageBox.Show($"Пользователь успешно создан", "Удачно");
+                                        lastNewUser = null;
+                                        break;
+                                    case HttpStatusCode.NotFound:
+                                        MessageBox.Show($"Роль с таким названием отсутствует", "Ошибка!");
+                                        break;
+                                    case HttpStatusCode.Conflict:
+                                        MessageBox.Show($"Пользователь с таким логином уже существует");
+                                        break;
+                                    default:
+                                        MessageBox.Show($"При создании пользователя возникла ошибка со статусом {code}", "Ошибка!");
+                                        break;
+                                }
+                            }
+                        } 
+                        else
+                        {
+                            if (dto.Login != oldDto.Login || !string.IsNullOrEmpty(dto.Password) || dto.Role != oldDto.Role)
+                            {
+                                var code = await ShoeHttpClient.UpdateEmployee(dto);
+                                switch (code)
+                                {
+                                    case HttpStatusCode.OK:
+                                        MessageBox.Show($"Пользователь успешно изменен", "Удачно");
+                                        lastNewUser = null;
+                                        break;
+                                    case HttpStatusCode.NotFound:
+                                        MessageBox.Show($"Роль с таким названием отсутствует", "Ошибка!");
+                                        break;
+                                    case HttpStatusCode.Conflict:
+                                        MessageBox.Show($"Пользователь с таким логином уже существует");
+                                        break;
+                                    default:
+                                        MessageBox.Show($"При создании пользователя возникла ошибка со статусом {code}", "Ошибка!");
+                                        break;
+                                }
+                            }
+                        }
                     }
                     else
                     {
-                        MessageBox.Show($"Пользователь с таким именем уже существует");
+                        MessageBox.Show($"Пользователь с таким именем уже существует", "Ошибка!");
                         dto.Login = "";
                     }
                 }
@@ -114,28 +156,32 @@ namespace Frontend.Windows.Admin
             }
         }
 
-        private void dataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            if (e.Column.Header.ToString() == "Пароль")
-            {
-                var password = (e.EditingElement as TextBox).Text;
-                MessageBox.Show($"Пароль успешно изменен на {password}");
-            }
-        }
-
         private void generatePassword_Click(object sender, RoutedEventArgs e)
         {
             var password = PasswordGenerator.Generate();
             var button = sender as Button;
-            var cell = button.Parent as DataGridCell;
-            var row = cell.Parent as DataGridRow;
+            var dto = button.DataContext as EmployeeInfoDto;
+            if (dto != null)
+            {
+                dataGrid.CommitEdit();
+                dto.Password = password;
+                dataGrid.Items.Refresh();
+            }
+        }
 
-            var employeeInfo = button.DataContext as EmployeeInfoDto;
-            if (employeeInfo == null) return;
-
-            // Изменяем значение соседней ячейки
-            employeeInfo.Role = "test"; // Устанавливаем значение в "Роль" или другую ячейку
-            dataGrid.Items.Refresh();
+        private void addUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (lastNewUser == null)
+            {
+                var list = (IList)dataGrid.ItemsSource;
+                lastNewUser = new EmployeeInfoDto();
+                list.Add(lastNewUser);
+                dataGrid.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show($"Перед добавлением нового пользователя впишите все данные предыдущего");
+            }
         }
     }
 }
