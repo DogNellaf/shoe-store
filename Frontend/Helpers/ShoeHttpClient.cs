@@ -1,7 +1,9 @@
-﻿using Library.Dto.Employee;
+using Library.Dto.Employee;
+using Library.Dto.Sale;
 using Library.Helpers;
 using ShoeStore.Dto.Employee;
 using ShoeStore.Models;
+using System.Collections;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -175,6 +177,42 @@ namespace ShoeStore.Helpers
 
             string itemsRaw = response.Values["result"].ToString();
             return JsonSerializer.Deserialize<List<string>>(itemsRaw);
+        }
+
+        internal static async Task<HttpStatusCode> CreateSale(SaleInfoDto dto)
+        {
+            var url = $"{BackendHostUrl}/api/sales/create";
+
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+
+            var createDto = new EmployeeCreateDto()
+            {
+                Login = dto.Login,
+                Password = dto.Password,
+                Role = dto.Role
+            };
+            var json = JsonSerializer.Serialize(createDto);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var request = await client.PostAsync(url, content);
+            var response = await request.Content.ReadFromJsonAsync<Response?>();
+
+            if (request == null)
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+
+            return (HttpStatusCode)response.StatusCode;
+        }
+
+        internal static async Task<HttpStatusCode> UpdateSale(SaleInfoDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static async Task<IEnumerable> GetSales()
+        {
+            throw new NotImplementedException();
         }
     }
 }
