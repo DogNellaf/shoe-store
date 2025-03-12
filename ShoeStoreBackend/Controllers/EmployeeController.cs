@@ -1,4 +1,4 @@
-﻿using Library.Dto.Employee;
+using Library.Dto.Employee;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShoeStore.Backend.Services.Interfaces;
@@ -102,29 +102,34 @@ namespace ShoeStore.Backend.Controllers
         {
             var result = new Dictionary<string, object>()
             {
-                { "result", _employeeService.GetAll().Select(x => new EmployeeInfoDto(x.Id, x.Login, x.Role)) }
+                {
+                    "result", _employeeService.GetAll().Select(x => new EmployeeInfoDto(x.Id, x.Login, x.Role))
+                }
             };
 
             return new JsonResponse(result, ResponseType.Info);
         }
 
-        //[Route("{login}")]
-        //[HttpPost]
-        //public IActionResult Create(string login)
-        //{
+        [Route("{login}")]
+        [HttpGet]
+        public IActionResult Get(string login)
+        {
+            var employee = _employeeService.Find(login);
+            if (employee == null)
+            {
+                return new JsonResponse("Сотрудник с таким именем не найден", ResponseType.Error);
+            }
 
-        //    if (string.IsNullOrEmpty(login))
-        //    {
-        //        return new JsonResponse("Не указан логин", ResponseType.ValidationError);
-        //    }
+            var employeeDto = new EmployeeInfoDto(employee.Id, employee.Login, employee.Role);
 
-        //    var employee = _employeeService.Find(login);
-        //    if (employee == null)
-        //    {
-        //        return new JsonResponse("Сотрудник с таким логином не существует", ResponseType.ValidationError);
-        //    }
+            var result = new Dictionary<string, object>()
+            {
+                {
+                    "result", employeeDto
+                }
+            };
 
-        //    return new JsonResponse(employee, ResponseType.Success);
-        //}
+            return new JsonResponse(result, ResponseType.Info);
+        }
     }
 }

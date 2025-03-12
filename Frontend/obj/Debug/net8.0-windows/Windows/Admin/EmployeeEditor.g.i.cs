@@ -87,7 +87,7 @@ namespace Frontend.Windows.Admin {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Frontend;component/windows/admin/employeeeditor.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Frontend;V1.0.0.0;component/windows/admin/employeeeditor.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Windows\Admin\EmployeeEditor.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

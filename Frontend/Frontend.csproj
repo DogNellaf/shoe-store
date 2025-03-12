@@ -14,12 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Library">
-      <HintPath>..\ShoeStoreClassesLibrary\bin\Debug\net8.0-windows7.0\Library.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="XamlAnimatedGif" Version="2.3.0" />
   </ItemGroup>
 
@@ -40,6 +34,10 @@
   <ItemGroup>
     <Folder Include="Windows\Seller\" />
     <Folder Include="Windows\Merchandiser\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShoeStoreClassesLibrary\Library.csproj" />
   </ItemGroup>
 
 </Project>

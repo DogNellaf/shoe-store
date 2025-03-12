@@ -1,4 +1,4 @@
-namespace Library.Dto.Sale
+namespace ShoeStore.Dto.Sale
 {
     public class SaleInfoDto
     {

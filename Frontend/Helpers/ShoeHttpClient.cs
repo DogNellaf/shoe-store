@@ -1,8 +1,6 @@
 using Library.Dto.Employee;
-using Library.Dto.Sale;
-using Library.Helpers;
 using ShoeStore.Dto.Employee;
-using ShoeStore.Models;
+using ShoeStore.Dto.Sale;
 using System.Collections;
 using System.Net;
 using System.Net.Http;
@@ -10,7 +8,6 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace ShoeStore.Helpers
 {
@@ -28,6 +25,33 @@ namespace ShoeStore.Helpers
         //        {"Authorization", $"Bearer { Token }" }
         //    };
         //}
+
+        internal static async Task<(Response, HttpStatusCode)> Get(string url)
+        {
+            using var client = new HttpClient();
+            var request = await client.GetAsync(url);
+
+            return null;
+
+            //if (!request.IsSuccessStatusCode)
+            //{
+            //    return request.StatusCode;
+            //}
+
+            //var response = await request.Content.ReadFromJsonAsync<Response?>();
+
+            //if (response == null)
+            //{
+            //    return HttpStatusCode.InternalServerError;
+            //}
+
+            //if (response.Values == null)
+            //{
+            //    return HttpStatusCode.InternalServerError;
+            //}
+
+            //return 
+        }
 
         internal static async Task<HttpStatusCode> Login(string login, string password)
         {
@@ -71,32 +95,21 @@ namespace ShoeStore.Helpers
             }
         }
 
+        internal static async Task<HttpStatusCode> GetEmployee(string login)
+        {
+
+        }
+
         internal static async Task<List<EmployeeInfoDto>> GetEmployees()
         {
             var url = $"{BackendHostUrl}/api/employees/";
 
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
-            //var request = new HttpRequestMessage()
-            //{
-            //    RequestUri = new Uri(url),
-            //    Headers = headers,
-            //    Method = HttpMethod.Get,
-            //};
-            //client. = $"Bearer {Token }";
+
             var request = await client.GetAsync(url);
             var response = await request.Content.ReadFromJsonAsync<Response?>();
 
-            // TODO: добавить проверку на отсутствие ответа от сервера
-            //if (response == null)
-            //{
-            //    return HttpStatusCode.InternalServerError;
-            //}
-
-            //if (response.Values == null)
-            //{
-            //    return HttpStatusCode.InternalServerError;
-            //}
 
             string itemsRaw = response.Values["result"].ToString();
             return JsonSerializer.Deserialize<List<EmployeeInfoDto>>(itemsRaw);
@@ -186,11 +199,20 @@ namespace ShoeStore.Helpers
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
 
-            var createDto = new EmployeeCreateDto()
+            // TODO: найти сотрудника по логину
+            var employeeId = dto.EmployeeLogin;
+            
+
+            // TODO: найти товар по названию
+            var itemId = dto.ItemTitle;
+
+            // TODO: подумать, как переписать серверную часть
+            var createDto = new SaleCreateDto() 
             {
-                Login = dto.Login,
-                Password = dto.Password,
-                Role = dto.Role
+                ItemId = -1,
+                EmployeeId = -1,
+                Count = 1,
+                IsReturned = false
             };
             var json = JsonSerializer.Serialize(createDto);
             var content = new StringContent(json, Encoding.UTF8, "application/json");

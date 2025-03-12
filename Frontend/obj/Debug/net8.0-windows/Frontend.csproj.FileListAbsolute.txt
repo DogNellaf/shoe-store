@@ -60,3 +60,14 @@ C:\Users\DogNellaf_\Desktop\Share\1. Work\09-06 - Курс по C# для Вяч
 C:\Users\DogNellaf_\Desktop\Share\1. Work\09-06 - Курс по C# для Вячеслав (0924 WPF C#)\Frontend\obj\Debug\net8.0-windows\Frontend.csproj.Up2Date
 C:\Users\DogNellaf_\Desktop\Share\1. Work\09-06 - Курс по C# для Вячеслав (0924 WPF C#)\Frontend\obj\Debug\net8.0-windows\Frontend.genruntimeconfig.cache
 C:\Users\DogNellaf_\Desktop\Share\1. Work\09-06 - Курс по C# для Вячеслав (0924 WPF C#)\Frontend\obj\Debug\net8.0-windows\ref\Frontend.dll
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Frontend.csproj.AssemblyReference.cache
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Windows\Admin\AdminPanel.g.cs
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Windows\Admin\EmployeeEditor.g.cs
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Windows\Admin\SalesEditor.g.cs
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\App.g.cs
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Frontend_MarkupCompile.cache
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Frontend_MarkupCompile.lref
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Frontend.dll
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\refint\Frontend.dll
+D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Frontend.pdb

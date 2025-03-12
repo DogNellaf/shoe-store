@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Library.Dto.Employee;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ShoeStore.Backend.Services;
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Dto.Item;
 using ShoeStore.Helpers;
@@ -105,8 +107,31 @@ namespace ShoeStore.Backend.Controllers
             var titles = dto.Parameters.Keys.ToArray();
             var values = dto.Parameters.SelectMany(x => x.Value).ToArray();
 
-            var result = _itemService.FindMany(titles, values, dto.ShopId.Value);
-            return new JsonResult(result);
+            return new JsonResult(
+                _itemService
+                .FindMany(titles, values, dto.ShopId.Value)
+                .Select(x => new ItemInfoDto(x))
+            );
+        }
+
+        [Route("{title}")]
+        [HttpGet]
+        public IActionResult Get(string title)
+        {
+            var item = _itemService.Find(title);
+            if (item == null)
+            {
+                return new JsonResponse("Товар с таким названием не найден", ResponseType.Error);
+            }
+
+            var result = new Dictionary<string, object>()
+            {
+                {
+                    "result", new ItemInfoDto(item)
+                }
+            };
+
+            return new JsonResponse(result, ResponseType.Info);
         }
     }
 }

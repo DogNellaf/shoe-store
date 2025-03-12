@@ -1,6 +1,6 @@
 using Library.Dto.Employee;
-using Library.Dto.Sale;
 using Library.Helpers;
+using ShoeStore.Dto.Sale;
 using ShoeStore.Helpers;
 using System.Collections;
 using System.Net;

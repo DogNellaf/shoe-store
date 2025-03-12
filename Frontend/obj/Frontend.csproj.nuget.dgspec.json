@@ -1,17 +1,95 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DogNellaf_\\Desktop\\Share\\1. Work\\09-06 - Курс по C# для Вячеслав (0924 WPF C#)\\Frontend\\Frontend.csproj": {}
+    "D:\\Work\\24-09-06 - vladislav\\Frontend\\Frontend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DogNellaf_\\Desktop\\Share\\1. Work\\09-06 - Курс по C# для Вячеслав (0924 WPF C#)\\Frontend\\Frontend.csproj": {
+    "D:\\Work\\24-09-06 - vladislav\\Frontend\\Frontend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DogNellaf_\\Desktop\\Share\\1. Work\\09-06 - Курс по C# для Вячеслав (0924 WPF C#)\\Frontend\\Frontend.csproj",
+        "projectUniqueName": "D:\\Work\\24-09-06 - vladislav\\Frontend\\Frontend.csproj",
         "projectName": "Frontend",
-        "projectPath": "C:\\Users\\DogNellaf_\\Desktop\\Share\\1. Work\\09-06 - Курс по C# для Вячеслав (0924 WPF C#)\\Frontend\\Frontend.csproj",
+        "projectPath": "D:\\Work\\24-09-06 - vladislav\\Frontend\\Frontend.csproj",
         "packagesPath": "C:\\Users\\DogNellaf_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DogNellaf_\\Desktop\\Share\\1. Work\\09-06 - Курс по C# для Вячеслав (0924 WPF C#)\\Frontend\\obj\\",
+        "outputPath": "D:\\Work\\24-09-06 - vladislav\\Frontend\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\DogNellaf_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {
+              "D:\\Work\\24-09-06 - vladislav\\ShoeStoreClassesLibrary\\Library.csproj": {
+                "projectPath": "D:\\Work\\24-09-06 - vladislav\\ShoeStoreClassesLibrary\\Library.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "XamlAnimatedGif": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Work\\24-09-06 - vladislav\\ShoeStoreClassesLibrary\\Library.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Work\\24-09-06 - vladislav\\ShoeStoreClassesLibrary\\Library.csproj",
+        "projectName": "Library",
+        "projectPath": "D:\\Work\\24-09-06 - vladislav\\ShoeStoreClassesLibrary\\Library.csproj",
+        "packagesPath": "C:\\Users\\DogNellaf_\\.nuget\\packages\\",
+        "outputPath": "D:\\Work\\24-09-06 - vladislav\\ShoeStoreClassesLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,9 +128,9 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
-            "XamlAnimatedGif": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[2.3.0, )"
+              "version": "[8.0.10, )"
             }
           },
           "imports": [
