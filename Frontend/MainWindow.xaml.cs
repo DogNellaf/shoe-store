@@ -1,4 +1,4 @@
-﻿using Frontend.Windows.Admin;
+using Frontend.Windows.Admin;
 using ShoeStore.Helpers;
 using System.Net;
 using System.Windows;
@@ -32,12 +32,12 @@ namespace ShoeStore.Frontend
                 return;
             }
 
-            var status = await ShoeHttpClient.Login(login, password);
+            var status = await BaseServerContext.Login(login, password);
             switch (status)
             {
                 case HttpStatusCode.OK:
                     //MessageBox.Show($"Вы успешно авторизовались");
-                    switch (ShoeHttpClient.Role)
+                    switch (BaseServerContext.Role)
                     {
                         case "Admin":
                             var adminPanel = new AdminPanel(this);
@@ -45,7 +45,7 @@ namespace ShoeStore.Frontend
                             Hide();
                             break;
                         default:
-                            MessageBox.Show($"Была получена несуществующая роль {ShoeHttpClient.Role}, обратитсь к техническому специалисту");
+                            MessageBox.Show($"Была получена несуществующая роль {BaseServerContext.Role}, обратитсь к техническому специалисту");
                             break;
                     }
                     break;

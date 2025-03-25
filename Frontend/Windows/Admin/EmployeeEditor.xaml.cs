@@ -1,4 +1,4 @@
-﻿using Library.Dto.Employee;
+using Library.Dto.Employee;
 using Library.Helpers;
 using ShoeStore.Helpers;
 using System.Collections;
@@ -28,7 +28,7 @@ namespace Frontend.Windows.Admin
 
         private async void showEmployees(object sender, RoutedEventArgs e)
         {
-            var employees = await ShoeHttpClient.GetEmployees();
+            var employees = await BaseServerContext.GetEmployees();
             employees = employees.Where(x => x.Role != "Admin").ToList();
 
             dataGrid.ItemsSource = employees;
@@ -100,7 +100,7 @@ namespace Frontend.Windows.Admin
                             }
                             else
                             {
-                                var code = await ShoeHttpClient.CreateEmployee(dto);
+                                var code = await BaseServerContext.CreateEmployee(dto);
                                 switch (code)
                                 {
                                     case HttpStatusCode.OK:
@@ -123,7 +123,7 @@ namespace Frontend.Windows.Admin
                         {
                             if (dto.Login != oldDto.Login || !string.IsNullOrEmpty(dto.Password) || dto.Role != oldDto.Role)
                             {
-                                var code = await ShoeHttpClient.UpdateEmployee(dto);
+                                var code = await BaseServerContext.UpdateEmployee(dto);
                                 switch (code)
                                 {
                                     case HttpStatusCode.OK:

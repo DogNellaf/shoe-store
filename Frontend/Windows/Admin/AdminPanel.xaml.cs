@@ -1,4 +1,4 @@
-﻿using ShoeStore.Frontend;
+using ShoeStore.Frontend;
 using ShoeStore.Helpers;
 using System.Windows;
 
@@ -14,7 +14,7 @@ namespace Frontend.Windows.Admin
         {
             InitializeComponent();
             _parent = parent;
-            TitleLabel.Content = $"Добро пожаловать, {ShoeHttpClient.UserLogin}!";
+            TitleLabel.Content = $"Добро пожаловать, {BaseServerContext.UserLogin}!";
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ShoeStore.Backend.Data;
 using ShoeStore.Backend.Services.Interfaces;
 using ShoeStore.Dto.Item;
@@ -30,6 +30,30 @@ namespace ShoeStore.Backend.Services
 
             _context.Items.Add(item);
             _context.SaveChanges();
+
+            if (dto.Properties != null)
+            {
+                foreach (var pair in dto.Properties)
+                {
+                    var title = pair.Key;
+                    var value = pair.Value;
+
+                    var property = _context.Properties.FirstOrDefault(x => x.Title == title);
+                    if (property != null)
+                    {
+                        _context.ItemsProperties.Add(
+                            new ItemProperty()
+                            {
+                                Item = item,
+                                Property = property,
+                                Value = value
+                            }
+                        );
+                    }
+                }
+                _context.SaveChanges();
+            }
+
             return item;
         }
 
@@ -59,6 +83,30 @@ namespace ShoeStore.Backend.Services
                     .Select(x => x.Item)
                     //.Distinct()
                     .ToList();
+        }
+
+        /// <summary>
+        /// Ищет товар по его названию через таблицу параметров
+        /// </summary>
+        /// <param name="title">Название</param>
+        /// <returns>Товар, если он есть, иначе null</returns>
+        public Item? Find(string title)
+        {
+            var property = _context.Properties.FirstOrDefault(x => x.Title == "Название");
+            if (property != null)
+            {
+                var itemProperty = _context.ItemsProperties.FirstOrDefault(x =>
+                    x.Property == property
+                    &&
+                    x.Value == title
+                );
+                if (itemProperty != null)
+                {
+                    return itemProperty.Item;
+                }
+            }
+
+            return null;
         }
     }
 }

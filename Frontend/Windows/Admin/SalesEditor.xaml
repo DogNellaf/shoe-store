@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Frontend.Windows.Admin"
         xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
-        xmlns:Collections="clr-namespace:System.Collections;assembly=System.Runtime" x:Class="Frontend.Windows.Admin.SalesEditor"
+        xmlns:Collections="clr-namespace:System.Collections;assembly=System.Runtime" x:Class="ShoeStore.Frontend.Windows.Admin.SalesEditor"
         mc:Ignorable="d"
         Title="Редактор продаж" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>

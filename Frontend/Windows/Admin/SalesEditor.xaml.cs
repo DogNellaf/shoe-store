@@ -1,13 +1,13 @@
 using Library.Dto.Employee;
 using Library.Helpers;
 using ShoeStore.Dto.Sale;
-using ShoeStore.Helpers;
+using ShoeStore.Helpers.ServerContexts;
 using System.Collections;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Frontend.Windows.Admin
+namespace ShoeStore.Frontend.Windows.Admin
 {
     /// <summary>
     /// Логика взаимодействия для EmployeeEditor.xaml
@@ -53,7 +53,7 @@ namespace Frontend.Windows.Admin
         private async void ShowSales(object sender, RoutedEventArgs e)
         {
             // Получаем все продажи со стороны сервера
-            var sales = await ShoeHttpClient.GetSales();
+            var sales = await SaleContext.GetSales();
 
             // Загружаем в таблицу данные, устанавливаем параметры
             dataGrid.ItemsSource = sales;
@@ -122,11 +122,11 @@ namespace Frontend.Windows.Admin
                 var code = HttpStatusCode.NoContent;
                 if (dto == lastNewSale)
                 {
-                    code = await ShoeHttpClient.CreateSale(dto);
+                    code = await SaleContext.CreateSale(dto);
                 }
                 else if (dto.ItemTitle != oldDto.ItemTitle || dto.EmployeeLogin != oldDto.EmployeeLogin)
                 {
-                    code = await ShoeHttpClient.UpdateSale(dto);
+                    code = await SaleContext.UpdateSale(dto);
                 }
 
                 // TODO: реализовать правильные коды ошибок

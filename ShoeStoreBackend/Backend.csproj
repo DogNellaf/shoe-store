@@ -14,9 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Library">
-      <HintPath>..\ShoeStoreClassesLibrary\bin\Debug\net8.0-windows7.0\Library.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\ShoeStoreClassesLibrary\Library.csproj" />
   </ItemGroup>
 
 </Project>

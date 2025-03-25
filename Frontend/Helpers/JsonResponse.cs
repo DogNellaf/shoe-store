@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace Frontend.Helpers
+namespace ShoeStore.Helpers
 {
     public class JsonResponse
     {
