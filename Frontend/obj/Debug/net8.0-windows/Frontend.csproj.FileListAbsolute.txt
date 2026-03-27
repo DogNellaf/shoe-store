@@ -71,3 +71,14 @@ D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Frontend_MarkupCo
 D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Frontend.dll
 D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\refint\Frontend.dll
 D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\Frontend.pdb
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\Frontend.csproj.AssemblyReference.cache
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\Windows\Admin\AdminPanel.g.cs
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\Windows\Admin\EmployeeEditor.g.cs
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\Windows\Admin\SalesEditor.g.cs
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\Frontend_MarkupCompile.cache
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\Frontend_MarkupCompile.lref
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\Frontend.dll
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\refint\Frontend.dll
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\Frontend.pdb

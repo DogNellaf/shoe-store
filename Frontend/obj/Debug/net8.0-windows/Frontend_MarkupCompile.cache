@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Work\24-09-06 - vladislav\Frontend\obj\Debug\net8.0-windows\
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\obj\Debug\net8.0-windows\
 Frontend
 none
 false
-TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\Work\24-09-06 - vladislav\Frontend\App.xaml
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+C:\Users\DogNellaf\Desktop\shoe-store\Frontend\App.xaml
 41105301034
 
-91244202224
-2101091465336
+161332595682
+199-1675744812
 MainWindow.xaml;Windows\Admin\AdminPanel.xaml;Windows\Admin\EmployeeEditor.xaml;Windows\Admin\SalesEditor.xaml;
 
 True
